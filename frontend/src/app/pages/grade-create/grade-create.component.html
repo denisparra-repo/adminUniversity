@@ -1,0 +1,108 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-between">
+    <h5 class="mb-0">
+        Crear Nota
+    </h5>
+</div>
+
+<!-- Grade -->
+<mat-card
+    class="daxa-card create-grade-card mb-25 border-radius bg-white border-none d-block"
+    [class.rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card-content>
+        @if(spinnerVisible) {
+            <mat-spinner style="margin:0 auto;" ></mat-spinner>     
+        } @else {
+            <form [formGroup]="gradeForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="mb-25">
+                          <div class="form-group">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Materia
+                              </label>
+                              <mat-form-field>
+                                  <mat-select formControlName="subjectId">
+                                      @for (subject of subjects; track subject) {
+                                          <mat-option [value]="subject.id">{{subject.name}}</mat-option>
+                                      }
+                                  </mat-select>
+                              </mat-form-field>
+                              <div class="error text-danger" *ngIf="gradeForm.get('subjectId')!.hasError('required') && gradeForm.get('subjectId')!.touched">
+                                Seleccione al menos una materia.
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                      <div class="mb-25">
+                          <div class="form-group">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Estudiante
+                              </label>
+                              <mat-form-field>
+                                  <mat-select formControlName="userId">
+                                      @for (student of students; track student) {
+                                          <mat-option [value]="student.id">{{student.name}} {{student.lastName}}</mat-option>
+                                      }
+                                  </mat-select>
+                              </mat-form-field>
+                              <div class="error text-danger" *ngIf="gradeForm.get('userId')!.hasError('required') && gradeForm.get('userId')!.touched">
+                                Seleccione al menos un estudiante.
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                       <div class="mb-25">
+                         <div class="form-group">
+                             <label class="main-label d-block lh-1 text-black">
+                                 Nota
+                             </label>
+                             <mat-form-field>
+                                 <mat-label>
+                                     Ingresar nota
+                                 </mat-label>
+                                 <input matInput type="text" id="grade" formControlName="grade">
+                             </mat-form-field>
+                             <div class="error text-danger" *ngIf="gradeForm.get('grade')!.hasError('required') && gradeForm.get('grade')!.touched">
+                                 Nota de carrera es requerido.
+                             </div>
+                         </div>
+                       </div> 
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="mb-25">
+                          <div class="form-group">
+                              <label class="main-label d-block lh-1 text-black">
+                                  Descripcion
+                              </label>
+                              <mat-form-field>
+                                  <mat-label>
+                                      Ingresar descripcion
+                                  </mat-label>
+                                  <input matInput type="text" id="description" formControlName="description">
+                              </mat-form-field>
+                              <div class="error text-danger" *ngIf="gradeForm.get('description')!.hasError('required') && gradeForm.get('description')!.touched">
+                                  Descripcion es requerido.
+                              </div>
+                          </div>
+                        </div> 
+                     </div>
+                </div>
+
+                <div class="btn-box">
+                    <button mat-button>
+                        Crear
+                    </button>
+                    <button mat-button type='button' (click)="cancelDialog()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        }     
+    </mat-card-content>
+</mat-card>

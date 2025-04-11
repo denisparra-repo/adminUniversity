@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>
+    Aviso
+</h1>
+<div mat-dialog-content>
+    <p>
+        ¿Tiene cambios pendientes, esta seguro que desea salir?
+    </p>
+</div>
+<div mat-dialog-actions class="mt-0">
+    <button mat-flat-button color="warn" [mat-dialog-close]="responseFalse">
+        No
+    </button>
+    <button mat-flat-button class="daxa" [mat-dialog-close]="responseTrue" cdkFocusInitial>
+        Si
+    </button>
+</div>

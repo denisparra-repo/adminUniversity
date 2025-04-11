@@ -1,0 +1,50 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-between">
+    <h5 class="mb-0">
+        Crear Carrera
+    </h5>
+</div>
+
+<!-- Create Course -->
+<mat-card
+    class="daxa-card create-course-card mb-25 border-radius bg-white border-none d-block"
+    [class.rtl-enabled]="themeService.isRTLEnabled()"
+>
+    <mat-card-content>
+        @if(spinnerVisible) {
+            <mat-spinner style="margin:0 auto;" ></mat-spinner>     
+        } @else {
+            <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                       <div class="mb-25">
+                         <div class="form-group">
+                             <label class="main-label d-block lh-1 text-black">
+                                 Nombre de Carrera
+                             </label>
+                             <mat-form-field>
+                                 <mat-label>
+                                     Ingresar nombre de carrera
+                                 </mat-label>
+                                 <input matInput type="text" id="name" formControlName="name">
+                             </mat-form-field>
+                             <div class="error text-danger" *ngIf="courseForm.get('name')!.hasError('required') && courseForm.get('name')!.touched">
+                                 Nombre de carrera es requerido.
+                             </div>
+                         </div>
+                       </div> 
+                    </div>
+                </div>
+
+                <div class="btn-box">
+                    <button mat-button>
+                        Crear
+                    </button>
+                    <button mat-button type='button' (click)="cancelDialog()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        }     
+    </mat-card-content>
+</mat-card>

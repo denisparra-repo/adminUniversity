@@ -1,0 +1,130 @@
+<div class="sign-up-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            @if(spinnerVisible) {
+                <mat-spinner style="margin:0 auto;" ></mat-spinner>
+                
+            } @else {
+            <div
+                class="daxa-form ml-auto mr-auto border-radius bg-white"
+                [class.card-borderd-theme]="themeService.isCardBorder()"
+                [class.component-dark-theme]="themeService.isDark()"
+                [class.rtl-enabled]="themeService.isRTLEnabled()"
+            >
+                <div class="title text-center">
+                    <h3>
+                        Registrar Usuario
+                    </h3>
+                </div>
+                <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Nombre
+                        </label>
+                        <mat-form-field>
+                            <mat-label>
+                                Ingresar Nombre
+                            </mat-label>
+                            <input matInput type="text" id="name" formControlName="name">
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('name')!.hasError('required') && authForm.get('name')!.touched">
+                            Nombre es requerido.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Apellido
+                        </label>
+                        <mat-form-field>
+                            <mat-label>
+                                Ingresar Apellido
+                            </mat-label>
+                            <input matInput type="text" id="lastName" formControlName="lastName">
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('lastName')!.hasError('required') && authForm.get('lastName')!.touched">
+                            Apellido es requerido.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Telefono
+                        </label>
+                        <mat-form-field>
+                            <mat-label>
+                                Ingresar Telefono
+                            </mat-label>
+                            <input matInput type="text" id="phone" formControlName="phone">
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('phone')!.hasError('required') && authForm.get('phone')!.touched">
+                            Telefono es requerido.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Roles
+                        </label>
+                        <mat-form-field>
+                            <mat-select formControlName="roles" multiple>
+                                @for (role of roles; track role) {
+                                    <mat-option [value]="role.roleName">{{role.rolValue}}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('roles')!.hasError('required') && authForm.get('roles')!.touched">
+                            Seleccione al menos un rol.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Correo Electronico
+                        </label>
+                        <mat-form-field>
+                            <mat-label>
+                                Ingresar Correo Electronico
+                            </mat-label>
+                            <input matInput type="email" id="email" formControlName="email">
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('email')!.hasError('required') && authForm.get('email')!.touched">
+                            Correo electronico es requerido.
+                        </div>
+                        <div class="error text-danger" *ngIf="authForm.get('email')!.hasError('email') && authForm.get('email')!.touched">
+                            Por favor introduzca un correo electronico valido.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="main-label d-block lh-1 text-black">
+                            Contraseña
+                        </label>
+                        <mat-form-field>
+                            <mat-label>
+                                Ingresar contraseña
+                            </mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <span class="material-symbols-outlined">
+                                    {{hide ? 'visibility_off' : 'visibility'}}
+                                </span>
+                            </button>
+                        </mat-form-field>
+                        <div class="error text-danger" *ngIf="authForm.get('password')!.hasError('required') && authForm.get('password')!.touched">
+                            Contraseña es requerido.
+                        </div>
+                        <div class="error text-danger" *ngIf="authForm.get('password')!.hasError('minlength') && authForm.get('password')!.touched">
+                            Contraseña debe de tener al menos una logitud de 8 caracteres.
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <button mat-button type="submit" [disabled]="authForm.invalid">
+                            Registrarse
+                        </button>
+                        <button mat-button type='button' (click)="cancelDialog()">
+                            Cancelar
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+            }
+        </div>
+    </div>
+</div>
