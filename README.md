@@ -10,7 +10,7 @@ This is the first version with a little functionality about manage courses, subj
 ## How To Run
 
 ### Backend
-You need to configure the data in the **application properties** in order to connect to Postgres database. This is the .
+You need to configure the data in the **application properties** in order to connect to Postgres database.
 ![enter image description here](https://i.postimg.cc/vg26jvHr/setup1.png)
 
 
